@@ -16,7 +16,7 @@
 import Foundation
 
 public protocol LolayUnderlyingableError: Error {
-    var underlyingError: Error { get }
+    var underlyingError: Error? { get }
 }
 
 public extension LolayUnderlyingableError where Self: LolayUnderlyingableError {

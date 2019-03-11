@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4ECB5CF022332001008D76EA /* LolayErred.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECB5CE622332001008D76EA /* LolayErred.framework */; };
-		4ECB5CF522332001008D76EA /* LolayErredTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB5CF422332001008D76EA /* LolayErredTests.swift */; };
+		4ECB5CF522332001008D76EA /* LolayUnderlyingableErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB5CF422332001008D76EA /* LolayUnderlyingableErrorTests.swift */; };
 		4ECB5CF722332001008D76EA /* LolayErred.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECB5CE922332001008D76EA /* LolayErred.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4ECB5D1822333511008D76EA /* LolayUnderlyingableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB5D1722333511008D76EA /* LolayUnderlyingableError.swift */; };
 		4ECB5D1A22333524008D76EA /* LolayErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB5D1922333524008D76EA /* LolayErrorManager.swift */; };
@@ -30,7 +30,7 @@
 		4ECB5CE922332001008D76EA /* LolayErred.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LolayErred.h; sourceTree = "<group>"; };
 		4ECB5CEA22332001008D76EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4ECB5CEF22332001008D76EA /* LolayErredTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LolayErredTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ECB5CF422332001008D76EA /* LolayErredTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LolayErredTests.swift; sourceTree = "<group>"; };
+		4ECB5CF422332001008D76EA /* LolayUnderlyingableErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LolayUnderlyingableErrorTests.swift; sourceTree = "<group>"; };
 		4ECB5CF622332001008D76EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4ECB5D1722333511008D76EA /* LolayUnderlyingableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LolayUnderlyingableError.swift; sourceTree = "<group>"; };
 		4ECB5D1922333524008D76EA /* LolayErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LolayErrorManager.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		4ECB5CF322332001008D76EA /* LolayErredTests */ = {
 			isa = PBXGroup;
 			children = (
-				4ECB5CF422332001008D76EA /* LolayErredTests.swift */,
+				4ECB5CF422332001008D76EA /* LolayUnderlyingableErrorTests.swift */,
 				4ECB5CF622332001008D76EA /* Info.plist */,
 			);
 			path = LolayErredTests;
@@ -214,7 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4ECB5CF522332001008D76EA /* LolayErredTests.swift in Sources */,
+				4ECB5CF522332001008D76EA /* LolayUnderlyingableErrorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
