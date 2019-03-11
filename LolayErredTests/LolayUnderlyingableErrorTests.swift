@@ -16,32 +16,32 @@
 import XCTest
 @testable import LolayErred
 
-struct UnderlyingableError: LolayUnderlyingableError, Equatable {
-    let underlyingError: Error?
-    
-    init(underlyingError: Error?) {
-        self.underlyingError = underlyingError
-    }
-    
-    static func == (lhs: UnderlyingableError, rhs: UnderlyingableError) -> Bool {
-        if (lhs.underlyingError == nil && rhs.underlyingError == nil) {
-            return true
-        } else if (lhs.underlyingError == nil || rhs.underlyingError == nil) {
-            return false
+class LolayErredTests: XCTestCase {
+    struct UnderlyingableError: LolayUnderlyingableError, Equatable {
+        let underlyingError: Error?
+        
+        init(underlyingError: Error?) {
+            self.underlyingError = underlyingError
         }
         
-        let lhse = lhs.underlyingError!
-        let rhse = rhs.underlyingError!
-        
-        return lhse.localizedDescription == rhse.localizedDescription
+        static func == (lhs: UnderlyingableError, rhs: UnderlyingableError) -> Bool {
+            if (lhs.underlyingError == nil && rhs.underlyingError == nil) {
+                return true
+            } else if (lhs.underlyingError == nil || rhs.underlyingError == nil) {
+                return false
+            }
+            
+            let lhse = lhs.underlyingError!
+            let rhse = rhs.underlyingError!
+            
+            return lhse.localizedDescription == rhse.localizedDescription
+        }
     }
-}
-
-enum NormalError: Error, Equatable {
-    case root
-}
-
-class LolayErredTests: XCTestCase {
+    
+    enum NormalError: Error, Equatable {
+        case root
+    }
+    
     func testNested() {
         let rootError = NormalError.root
         let intermediateError = UnderlyingableError(underlyingError: rootError)
