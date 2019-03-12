@@ -75,6 +75,12 @@ class LolayErrorManagerTests: XCTestCase, LolayErrorDelegate {
         runTests(useTableName: true, delegate: self, error: EnumError.firstEnum, prefix: "ERRLOCENM", titlePrefix: "ERRLOCENM", buttonPrefix: "ERRLOCENM")
     }
     
+    func testDefaults() {
+        let manager = LolayErrorManager(bundle: Bundle(for: type(of: self)), tableName: "invalid")
+        XCTAssertEqual(manager.titleForError(EnumError.firstEnum), "Whoops!")
+        XCTAssertEqual(manager.buttonTextForError(EnumError.firstEnum), "OK")
+    }
+    
     // MARK: - LolayErrorDelegate
     func errorManager(_ errorManager: LolayErrorManager, shouldPresentError error: Error) -> Bool {
         return true
