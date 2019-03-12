@@ -25,7 +25,7 @@ public class LolayErrorManager {
         self.bundle = nil
         self.tableName = nil
     }
-    public init(bundle: Bundle, tableName: String?) {
+    public init(bundle: Bundle, tableName: String? = nil) {
         self.bundle = bundle
         self.tableName = tableName
     }
@@ -34,6 +34,7 @@ public class LolayErrorManager {
         case localizedTitle
         case localizedDescription
         case recoverySuggestion
+        case failureReason
         case buttonText
     }
     
@@ -42,16 +43,24 @@ public class LolayErrorManager {
             return self.delegate!.errorManager(self, localizedStringForKey: key)
         }
 
+        var localizedString: String?
         if self.bundle != nil {
-            return NSLocalizedString(key, tableName: self.tableName!, bundle: self.bundle!, value: "**" + key + "**", comment: "")
+            localizedString = NSLocalizedString(key, tableName: self.tableName, bundle: self.bundle!, comment: "")
         } else {
-            return NSLocalizedString(key, comment: "")
+            localizedString = NSLocalizedString(key, comment: "")
         }
+        
+        return localizedString == key ? nil : localizedString
     }
     
     func keyForError(_ error: Error, keyType: KeyType) -> String {
         var key = "error-"
-        key += String(describing: type(of: error))
+        if let lolayError = error as? LolayError {
+            key += lolayError.errorKey
+        } else {
+            key += String(describing: type(of: error))
+        }
+ 
         key += "-"
         
         switch keyType {
@@ -59,6 +68,8 @@ public class LolayErrorManager {
             key += "localizedTitle"
         case .localizedDescription:
             key += "localizedDescription"
+        case .failureReason:
+            key += "failureReason"
         case .recoverySuggestion:
             key += "recoverySuggestion"
         case .buttonText:
@@ -73,15 +84,9 @@ public class LolayErrorManager {
             return self.delegate!.errorManager(self, titleForError: error)
         }
         
-        var title: String?
-        
-        if let localizedError = error as? LocalizedError {
-            title = localizedError.errorDescription
-        } else {
-            let titleKey = keyForError(error, keyType: .localizedTitle)
-            title = localizedStringForKey(titleKey)
-        }
-        
+        let titleKey = keyForError(error, keyType: .localizedTitle)
+        var title: String? = localizedStringForKey(titleKey)
+
         if title == nil {
             title = localizedStringForKey("error-localizedTitle")
         }
@@ -99,14 +104,18 @@ public class LolayErrorManager {
         }
         
         var description: String?
+        var failureReason: String?
         var recoverySuggestion: String?
         
         if let localizedError = error as? LocalizedError {
-            description = localizedError.failureReason
+            description = localizedError.errorDescription
+            failureReason = localizedError.failureReason
             recoverySuggestion = localizedError.recoverySuggestion
         } else {
             let descriptionKey = keyForError(error, keyType: .localizedDescription)
             description = localizedStringForKey(descriptionKey)
+            let failureReasonKey = keyForError(error, keyType: .failureReason)
+            failureReason = localizedStringForKey(failureReasonKey)
             let recoverySuggestionKey = keyForError(error, keyType: .recoverySuggestion)
             recoverySuggestion = localizedStringForKey(recoverySuggestionKey)
         }
@@ -114,6 +123,14 @@ public class LolayErrorManager {
         var message = ""
         if description != nil {
             message += description!
+        }
+        
+        if failureReason != nil {
+            if (message.count > 0) {
+                message += "\n"
+            }
+            
+            message += failureReason!
         }
         
         if recoverySuggestion != nil {

@@ -1,0 +1,15 @@
+"error-localizedTitle" = "DEF:LOCALIZED_TITLE";
+"error-localizedDescription" = "DEF:LOCALIZED_DESCRIPTION";
+"error-recoverySuggestion" = "DEF:RECOVERY_SUGGESTION";
+"error-buttonText" = "DEF:BUTTON_TEXT";
+
+"error-TestLocalizedError-localizedTitle" = "LOCLE:LOCALIZED_TITLE";
+"error-TestLocalizedError-localizedDescription" = "LOCLE:LOCALIZED_DESCRIPTION";
+"error-TestLocalizedError-recoverySuggestion" = "LOCLE:RECOVERY_SUGGESTION";
+"error-TestLocalizedError-buttonText" = "LOCLE:BUTTON_TEXT";
+
+"error-EnumError.firstEnum-localizedTitle" = "LOCENM:LOCALIZED_TITLE";
+"error-EnumError.firstEnum-localizedDescription" = "LOCENM:LOCALIZED_DESCRIPTION";
+"error-EnumError.firstEnum-failureReason" = "LOCENM:FAILURE_REASON";
+"error-EnumError.firstEnum-recoverySuggestion" = "LOCENM:RECOVERY_SUGGESTION";
+"error-EnumError.firstEnum-buttonText" = "LOCENM:BUTTON_TEXT";

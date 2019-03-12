@@ -15,7 +15,7 @@
 
 import Foundation
 
-public protocol LolayUnderlyingableError: Error {
+public protocol LolayUnderlyingableError: LolayError {
     var underlyingError: Error? { get }
 }
 
