@@ -163,7 +163,7 @@ public class LolayErrorManager {
         return button!
     }
     
-    func presentError(_ error: Error) {
+    public func presentError(_ error: Error) {
         guard Thread.isMainThread else {
             DispatchQueue.main.sync {
                 self.presentError(error)
@@ -202,7 +202,7 @@ public class LolayErrorManager {
         }
     }
     
-    func presentErrors(_ errors: [Error]) {
+    public func presentErrors(_ errors: [Error]) {
         for error in errors {
             presentError(error)
         }
