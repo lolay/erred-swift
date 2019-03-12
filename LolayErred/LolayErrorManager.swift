@@ -175,7 +175,7 @@ public class LolayErrorManager {
         if self.delegate != nil {
             presentError = self.delegate!.errorManager(self, shouldPresentError: error)
         }
-        guard !presentError else { return }
+        guard presentError else { return }
         
         guard !self.showingError else { return }
         self.showingError = true
