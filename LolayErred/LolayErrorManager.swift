@@ -17,8 +17,8 @@ import Foundation
 
 public class LolayErrorManager {
     public weak var delegate: LolayErrorDelegate?
-    let bundle: Bundle?
-    let tableName: String?
+    public let bundle: Bundle?
+    public let tableName: String?
     var showingError: Bool = false
 
     public init() {
@@ -30,7 +30,7 @@ public class LolayErrorManager {
         self.tableName = tableName
     }
     
-    enum KeyType {
+    public enum KeyType {
         case localizedTitle
         case localizedDescription
         case recoverySuggestion
@@ -38,7 +38,7 @@ public class LolayErrorManager {
         case buttonText
     }
     
-    func localizedStringForKey(_ key: String, skipDelegate: Bool = false) -> String? {
+    public func localizedStringForKey(_ key: String, skipDelegate: Bool = false) -> String? {
         if !skipDelegate && self.delegate != nil {
             return self.delegate!.errorManager(self, localizedStringForKey: key)
         }
@@ -53,7 +53,7 @@ public class LolayErrorManager {
         return localizedString == key ? nil : localizedString
     }
     
-    func keyForError(_ error: Error, keyType: KeyType) -> String {
+    public func keyForError(_ error: Error, keyType: KeyType) -> String {
         var key = "error-"
         if let lolayError = error as? LolayError {
             key += lolayError.errorKey
@@ -79,7 +79,7 @@ public class LolayErrorManager {
         return key
     }
     
-    func titleForError(_ error: Error, skipDelegate: Bool = false) -> String {
+    public func titleForError(_ error: Error, skipDelegate: Bool = false) -> String {
         if !skipDelegate && self.delegate != nil {
             return self.delegate!.errorManager(self, titleForError: error)
         }
@@ -98,7 +98,7 @@ public class LolayErrorManager {
         return title!
     }
     
-    func messageForError(_ error: Error, skipDelegate: Bool = false) -> String? {
+    public func messageForError(_ error: Error, skipDelegate: Bool = false) -> String? {
         if !skipDelegate && self.delegate != nil {
             return self.delegate!.errorManager(self, messageForError: error)
         }
@@ -144,7 +144,7 @@ public class LolayErrorManager {
         return message.count > 0 ? message : nil
     }
     
-    func buttonTextForError(_ error: Error, skipDelegate: Bool = false) -> String {
+    public func buttonTextForError(_ error: Error, skipDelegate: Bool = false) -> String {
         if !skipDelegate && self.delegate != nil {
             return self.delegate!.errorManager(self, buttonTextForError: error)
         }
