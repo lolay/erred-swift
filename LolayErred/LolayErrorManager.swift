@@ -187,7 +187,7 @@ public class LolayErrorManager {
         return controller
     }
     
-    public func presentError(_ error: Error) {
+    public func presentError(_ error: Error, onCancel: ((LolayErrorManager, Error) -> Void)? = nil) {
         guard Thread.isMainThread else {
             DispatchQueue.main.sync {
                 self.presentError(error)
@@ -209,8 +209,14 @@ public class LolayErrorManager {
         let buttonText = buttonTextForError(error)
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: buttonText, style: .cancel) { action in
-            self.showingError = false
+        alertController.addAction(UIAlertAction(title: buttonText, style: .cancel) { [weak self, error, onCancel] action in
+            guard let errorManager = self else { return }
+            
+            errorManager.showingError = false
+            
+            if let onAction = onCancel {
+                onAction(errorManager, error)
+            }
         })
         
         let topViewController = self.topViewController()

@@ -5,6 +5,9 @@
       location = "group:LolayErred.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:LolayErredExample.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

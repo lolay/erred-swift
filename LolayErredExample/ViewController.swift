@@ -14,14 +14,26 @@
 //
 
 
-#import <UIKit/UIKit.h>
+import UIKit
+import LolayErred
 
-//! Project version number for LolayErred.
-FOUNDATION_EXPORT double LolayErredVersionNumber;
+enum ViewError: Error {
+    case chained1
+    case chained2
+}
 
-//! Project version string for LolayErred.
-FOUNDATION_EXPORT const unsigned char LolayErredVersionString[];
+class ViewController: UITableViewController {
+    let errorManager = LolayErrorManager(bundle: Bundle(for: ViewController.self))
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
 
-// In this header, you should import all the public headers of your framework using statements like #import <LolayErred/PublicHeader.h>
-
+    @IBAction func chainPressed(sender: UIButton) {
+        self.errorManager.presentError(ViewError.chained1) { (errorManager, _) in
+            errorManager.presentError(ViewError.chained2)
+        }
+    }
+}
 
