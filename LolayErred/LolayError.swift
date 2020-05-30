@@ -19,8 +19,8 @@ public protocol LolayError: Error {
     var errorKey: String { get }
 }
 
-public extension LolayError where Self: LolayError {
-    public var errorKey: String {
+public extension LolayError {
+    var errorKey: String {
         get {
             return String(describing: type(of: self))
         }

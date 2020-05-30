@@ -19,8 +19,8 @@ public protocol LolayUnderlyingableError: LolayError {
     var underlyingError: Error? { get }
 }
 
-public extension LolayUnderlyingableError where Self: LolayUnderlyingableError {
-    public func recursiveUnderlyingError() -> Error? {
+public extension LolayUnderlyingableError {
+    func recursiveUnderlyingError() -> Error? {
         var error: Error? = self
         var lastError: Error? = nil
         
@@ -36,7 +36,7 @@ public extension LolayUnderlyingableError where Self: LolayUnderlyingableError {
         return lastError
     }
     
-    public func recursiveUnderlyingErrorOrSelf() -> Error {
+    func recursiveUnderlyingErrorOrSelf() -> Error {
         let error = self.recursiveUnderlyingError()
         return error != nil ? error! : self
     }
