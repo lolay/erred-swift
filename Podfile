@@ -3,8 +3,6 @@ inhibit_all_warnings!
 
 project 'LolayErred.xcodeproj'
 
-target 'LolayErred' do
-  target 'LolayErredTests' do
-    inherit! :search_paths
-  end
+target :LolayErred do
+  target :LolayErredTests
 end
