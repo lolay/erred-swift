@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Xcode Select
+      run: sudo xcode-select -switch /Applications/Xcode_11.5.app
+    - name: Xcode Versions
+      run: xcodebuild -version -sdk
+    - name: Build and Test
+      run: xcodebuild -workspace LolayErred.xcworkspace -scheme LolayErred -sdk iphoneos13.5 -destination "platform=iOS Simulator,OS=13.5,name=iPhone SE (2nd generation)" clean build test | xcpretty
