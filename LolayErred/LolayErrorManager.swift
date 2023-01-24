@@ -1,4 +1,4 @@
-//  Copyright © 2019 Lolay, Inc.
+//  Copyright © 2019, 2023 Lolay, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -164,7 +164,8 @@ public class LolayErrorManager {
     }
     
     func topViewController() -> UIViewController {
-        let controller = UIApplication.shared.keyWindow!.rootViewController
+        // This would be a problem with multiple screens as it arbitrarily chooses which window to display the error
+        let controller = UIApplication.shared.connectedScenes.compactMap { ($0 as? UIWindowScene)?.keyWindow }.first!.rootViewController
         assert(controller != nil, "App doesn't have a rootViewController yet!")
         return self.topViewController(controller: controller!)
     }

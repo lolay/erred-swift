@@ -1,4 +1,4 @@
-//  Copyright © 2019 Lolay, Inc.
+//  Copyright © 2019, 2023 Lolay, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 import Foundation
 
-public protocol LolayErrorDelegate: class {
+public protocol LolayErrorDelegate: AnyObject {
     /// Called before an error is presented. Often used for logging or surpressing presenting an error
     func errorManager(_ errorManager: LolayErrorManager, shouldPresentError error:Error) -> Bool
     /// Called after an error is presented. Often used for logging.

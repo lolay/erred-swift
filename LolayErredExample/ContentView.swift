@@ -1,4 +1,4 @@
-//  Copyright © 2019 Lolay, Inc.
+//  Copyright © 2023 Lolay, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -13,8 +13,7 @@
 //  limitations under the License.
 //
 
-
-import UIKit
+import SwiftUI
 import LolayErred
 
 enum ViewError: Error {
@@ -22,18 +21,30 @@ enum ViewError: Error {
     case chained2
 }
 
-class ViewController: UITableViewController {
-    let errorManager = LolayErrorManager(bundle: Bundle(for: ViewController.self))
+struct ContentView: View {
+    class ContentViewClass {}
+    let errorManager = LolayErrorManager(bundle: Bundle(for: ContentViewClass.self))
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    @IBAction func chainPressed(sender: UIButton) {
-        self.errorManager.presentError(ViewError.chained1) { (errorManager, _) in
-            errorManager.presentError(ViewError.chained2)
+    var body: some View {
+        Button("Press Me") {
+            self.errorManager.presentError(ViewError.chained1) { (errorManager, _) in
+                errorManager.presentError(ViewError.chained2)
+            }
         }
     }
 }
 
+#if DEBUG
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+#endif
+
+/*
+ @IBAction func chainPressed(sender: UIButton) {
+ }
+
+ 
+ */

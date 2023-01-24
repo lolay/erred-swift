@@ -1,4 +1,4 @@
-platform :ios, '12.2'
+platform :ios, '16.0'
 inhibit_all_warnings!
 
 project 'LolayErred.xcodeproj'

@@ -1,4 +1,4 @@
-//  Copyright © 2019, 2023 Lolay, Inc.
+//  Copyright © 2023 Lolay, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -13,15 +13,13 @@
 //  limitations under the License.
 //
 
+import SwiftUI
 
-#import <UIKit/UIKit.h>
-
-//! Project version number for LolayErred.
-FOUNDATION_EXPORT double LolayErredVersionNumber;
-
-//! Project version string for LolayErred.
-FOUNDATION_EXPORT const unsigned char LolayErredVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <LolayErred/PublicHeader.h>
-
-
+@main
+struct LolayErredExampleApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}

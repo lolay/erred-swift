@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E902C18223F7B9200ADBA28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E902C17223F7B9200ADBA28 /* AppDelegate.swift */; };
-		4E902C1A223F7B9200ADBA28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E902C19223F7B9200ADBA28 /* ViewController.swift */; };
-		4E902C1D223F7B9200ADBA28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E902C1B223F7B9200ADBA28 /* Main.storyboard */; };
+		4E2681A429804F3800E4FD60 /* LolayErredExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2681A329804F3800E4FD60 /* LolayErredExampleApp.swift */; };
+		4E2681A729804F9500E4FD60 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2681A629804F9500E4FD60 /* ContentView.swift */; };
 		4E902C1F223F7B9400ADBA28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E902C1E223F7B9400ADBA28 /* Assets.xcassets */; };
-		4E902C22223F7B9400ADBA28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E902C20223F7B9400ADBA28 /* LaunchScreen.storyboard */; };
 		4E902C2A223F7BA500ADBA28 /* LolayErred.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E902C29223F7BA500ADBA28 /* LolayErred.framework */; };
 		4E902C2B223F7BA500ADBA28 /* LolayErred.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E902C29223F7BA500ADBA28 /* LolayErred.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -31,12 +29,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4E2681A329804F3800E4FD60 /* LolayErredExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LolayErredExampleApp.swift; sourceTree = "<group>"; };
+		4E2681A529804F5B00E4FD60 /* LolayErred.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LolayErred.framework; path = "../../../../Library/Developer/Xcode/DerivedData/LolayErred-fyccgfnybksqzoevicdohbhbnsbp/Build/Products/Debug-iphoneos/LolayErred.framework"; sourceTree = "<group>"; };
+		4E2681A629804F9500E4FD60 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4E902C14223F7B9200ADBA28 /* LolayErredExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LolayErredExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E902C17223F7B9200ADBA28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4E902C19223F7B9200ADBA28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4E902C1C223F7B9200ADBA28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4E902C1E223F7B9400ADBA28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4E902C21223F7B9400ADBA28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E902C23223F7B9400ADBA28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E902C29223F7BA500ADBA28 /* LolayErred.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LolayErred.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -56,8 +53,8 @@
 		4E902C0B223F7B9200ADBA28 = {
 			isa = PBXGroup;
 			children = (
-				4E902C29223F7BA500ADBA28 /* LolayErred.framework */,
 				4E902C16223F7B9200ADBA28 /* LolayErredExample */,
+				4E902C29223F7BA500ADBA28 /* LolayErred.framework */,
 				4E902C15223F7B9200ADBA28 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,11 +70,10 @@
 		4E902C16223F7B9200ADBA28 /* LolayErredExample */ = {
 			isa = PBXGroup;
 			children = (
-				4E902C17223F7B9200ADBA28 /* AppDelegate.swift */,
-				4E902C19223F7B9200ADBA28 /* ViewController.swift */,
-				4E902C1B223F7B9200ADBA28 /* Main.storyboard */,
+				4E2681A529804F5B00E4FD60 /* LolayErred.framework */,
+				4E2681A329804F3800E4FD60 /* LolayErredExampleApp.swift */,
+				4E2681A629804F9500E4FD60 /* ContentView.swift */,
 				4E902C1E223F7B9400ADBA28 /* Assets.xcassets */,
-				4E902C20223F7B9400ADBA28 /* LaunchScreen.storyboard */,
 				4E902C23223F7B9400ADBA28 /* Info.plist */,
 			);
 			path = LolayErredExample;
@@ -111,7 +107,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = "Lolay, Inc.";
 				TargetAttributes = {
 					4E902C13223F7B9200ADBA28 = {
@@ -142,9 +138,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E902C22223F7B9400ADBA28 /* LaunchScreen.storyboard in Resources */,
 				4E902C1F223F7B9400ADBA28 /* Assets.xcassets in Resources */,
-				4E902C1D223F7B9200ADBA28 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,31 +149,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E902C1A223F7B9200ADBA28 /* ViewController.swift in Sources */,
-				4E902C18223F7B9200ADBA28 /* AppDelegate.swift in Sources */,
+				4E2681A429804F3800E4FD60 /* LolayErredExampleApp.swift in Sources */,
+				4E2681A729804F9500E4FD60 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		4E902C1B223F7B9200ADBA28 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4E902C1C223F7B9200ADBA28 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		4E902C20223F7B9400ADBA28 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4E902C21223F7B9400ADBA28 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4E902C24223F7B9400ADBA28 /* Debug */ = {
@@ -208,6 +183,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -233,7 +209,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -269,6 +245,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -288,7 +265,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -305,13 +282,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4KQ6DV2XX8;
 				INFOPLIST_FILE = LolayErredExample/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.lolay.LolayErredExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -323,13 +301,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4KQ6DV2XX8;
 				INFOPLIST_FILE = LolayErredExample/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.lolay.LolayErredExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
