@@ -14,6 +14,7 @@
 //
 
 import Foundation
+import UIKit
 
 public class LolayErrorManager {
     public weak var delegate: LolayErrorDelegate?

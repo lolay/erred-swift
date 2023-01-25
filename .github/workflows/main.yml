@@ -19,4 +19,4 @@ jobs:
     - name: Xcode Versions
       run: xcodebuild -version -sdk
     - name: Build and Test
-      run: xcodebuild -workspace LolayErred.xcworkspace -scheme LolayErred -sdk iphoneos16.2 -destination "platform=iOS Simulator,OS=16.2,name=iPhone 14" clean build test | xcpretty
+      run: xcodebuild -scheme LolayErred -sdk iphonesimulator16.2 -destination "platform=iOS Simulator,OS=16.2,name=iPhone 14" clean build test | xcpretty
