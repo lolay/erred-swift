@@ -41,7 +41,7 @@ enum EnumError: String, Error, LolayError {
 class LolayErrorManagerTests: XCTestCase, LolayErrorDelegate {
     func runTests(useTableName: Bool, delegate: LolayErrorDelegate?, error: Error, prefix: String, titlePrefix: String, buttonPrefix: String) {
         let tableName: String? = useTableName ? "LolayErredTests" : nil
-        let manager = LolayErrorManager(bundle: Bundle(for: type(of: self)), tableName: tableName)
+        let manager = LolayErrorManager(bundle: Bundle.module, tableName: tableName)
         manager.delegate = delegate
         
         let title = manager.titleForError(error)
