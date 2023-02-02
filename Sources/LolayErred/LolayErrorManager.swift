@@ -189,14 +189,8 @@ public class LolayErrorManager {
         return controller
     }
     
+    @MainActor
     public func presentError(_ error: Error, onCancel: ((LolayErrorManager, Error) -> Void)? = nil) {
-        guard Thread.isMainThread else {
-            DispatchQueue.main.sync {
-                self.presentError(error)
-            }
-            return
-        }
-        
         var presentError = true
         if self.delegate != nil {
             presentError = self.delegate!.errorManager(self, shouldPresentError: error)
@@ -229,6 +223,7 @@ public class LolayErrorManager {
         }
     }
     
+    @MainActor
     public func presentErrors(_ errors: [Error]) {
         for error in errors {
             presentError(error)
