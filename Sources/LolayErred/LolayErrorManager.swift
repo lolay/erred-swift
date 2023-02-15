@@ -16,6 +16,7 @@
 import Foundation
 import UIKit
 
+@MainActor
 public class LolayErrorManager {
     public weak var delegate: LolayErrorDelegate?
     public let bundle: Bundle?

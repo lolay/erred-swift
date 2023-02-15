@@ -15,6 +15,7 @@
 
 import Foundation
 
+@MainActor
 public protocol LolayErrorDelegate: AnyObject {
     /// Called before an error is presented. Often used for logging or surpressing presenting an error
     func errorManager(_ errorManager: LolayErrorManager, shouldPresentError error:Error) -> Bool
