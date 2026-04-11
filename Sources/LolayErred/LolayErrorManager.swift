@@ -1,4 +1,4 @@
-//  Copyright © 2019, 2023 Lolay, Inc.
+//  Copyright © 2019, 2023, 2026 Lolay, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -14,13 +14,11 @@
 //
 
 import Foundation
-#if canImport(UIKit)
-import UIKit
-#endif
 
 @MainActor
 public class LolayErrorManager {
     public weak var delegate: LolayErrorDelegate?
+    public var presenter: LolayErrorPresenter?
     public nonisolated let bundle: Bundle?
     public nonisolated let tableName: String?
     var showingError: Bool = false
@@ -29,11 +27,12 @@ public class LolayErrorManager {
         self.bundle = nil
         self.tableName = nil
     }
+
     public init(bundle: Bundle, tableName: String? = nil) {
         self.bundle = bundle
         self.tableName = tableName
     }
-    
+
     public enum KeyType {
         case localizedTitle
         case localizedDescription
@@ -41,7 +40,7 @@ public class LolayErrorManager {
         case failureReason
         case buttonText
     }
-    
+
     public func localizedStringForKey(_ key: String, skipDelegate: Bool = false) -> String? {
         if !skipDelegate && self.delegate != nil {
             return self.delegate!.errorManager(self, localizedStringForKey: key)
@@ -53,10 +52,10 @@ public class LolayErrorManager {
         } else {
             localizedString = NSLocalizedString(key, comment: "")
         }
-        
+
         return localizedString == key ? nil : localizedString
     }
-    
+
     public func keyForError(_ error: Error, keyType: KeyType) -> String {
         var key = "error-"
         if let lolayError = error as? LolayError {
@@ -64,9 +63,9 @@ public class LolayErrorManager {
         } else {
             key += String(describing: type(of: error))
         }
- 
+
         key += "-"
-        
+
         switch keyType {
         case .localizedTitle:
             key += "localizedTitle"
@@ -79,38 +78,38 @@ public class LolayErrorManager {
         case .buttonText:
             key += "buttonText"
         }
-        
+
         return key
     }
-    
+
     public func titleForError(_ error: Error, skipDelegate: Bool = false) -> String {
         if !skipDelegate && self.delegate != nil {
             return self.delegate!.errorManager(self, titleForError: error)
         }
-        
+
         let titleKey = keyForError(error, keyType: .localizedTitle)
         var title: String? = localizedStringForKey(titleKey)
 
         if title == nil {
             title = localizedStringForKey("error-localizedTitle")
         }
-        
+
         if title == nil {
             title = "Whoops!"
         }
-        
+
         return title!
     }
-    
+
     public func messageForError(_ error: Error, skipDelegate: Bool = false) -> String? {
         if !skipDelegate && self.delegate != nil {
             return self.delegate!.errorManager(self, messageForError: error)
         }
-        
+
         var description: String?
         var failureReason: String?
         var recoverySuggestion: String?
-        
+
         if let localizedError = error as? LocalizedError {
             description = localizedError.errorDescription
             failureReason = localizedError.failureReason
@@ -123,75 +122,51 @@ public class LolayErrorManager {
             let recoverySuggestionKey = keyForError(error, keyType: .recoverySuggestion)
             recoverySuggestion = localizedStringForKey(recoverySuggestionKey)
         }
-        
+
         var message = ""
         if description != nil {
             message += description!
         }
-        
+
         if failureReason != nil {
             if (message.count > 0) {
                 message += "\n"
             }
-            
+
             message += failureReason!
         }
-        
+
         if recoverySuggestion != nil {
             if (message.count > 0) {
                 message += "\n"
             }
-            
+
             message += recoverySuggestion!
         }
-        
+
         return message.count > 0 ? message : nil
     }
-    
+
     public func buttonTextForError(_ error: Error, skipDelegate: Bool = false) -> String {
         if !skipDelegate && self.delegate != nil {
             return self.delegate!.errorManager(self, buttonTextForError: error)
         }
-        
+
         let buttonKey = keyForError(error, keyType: .buttonText)
         var button = localizedStringForKey(buttonKey)
-        
+
         if button == nil {
             button = localizedStringForKey("error-buttonText")
         }
-        
+
         if button == nil {
             button = "OK"
         }
-        
+
         return button!
     }
-    
-    #if canImport(UIKit)
-    func topViewController() -> UIViewController {
-        // This would be a problem with multiple screens as it arbitrarily chooses which window to display the error
-        let controller = UIApplication.shared.connectedScenes.compactMap { ($0 as? UIWindowScene)?.keyWindow }.first!.rootViewController
-        assert(controller != nil, "App doesn't have a rootViewController yet!")
-        return self.topViewController(controller: controller!)
-    }
 
-    func topViewController(controller: UIViewController) -> UIViewController {
-        var nextController: UIViewController?
-
-        if let navigationController = controller as? UINavigationController {
-            nextController = navigationController.topViewController
-        } else if let tabController = controller as? UITabBarController {
-            nextController = tabController.selectedViewController
-        } else if let presentedController = controller.presentedViewController {
-            nextController = presentedController
-        }
-
-        if let recurseController = nextController {
-            return self.topViewController(controller: recurseController)
-        }
-
-        return controller
-    }
+    // MARK: - Presentation
 
     @MainActor
     public func presentError(_ error: Error, onCancel: (@MainActor (LolayErrorManager, Error) -> Void)? = nil) {
@@ -208,19 +183,11 @@ public class LolayErrorManager {
         let message = messageForError(error)
         let buttonText = buttonTextForError(error)
 
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: buttonText, style: .cancel) { [weak self, error, onCancel] action in
+        self.presenter?.present(title: title, message: message, buttonText: buttonText) { [weak self] in
             guard let errorManager = self else { return }
-
             errorManager.showingError = false
-
-            if let onAction = onCancel {
-                onAction(errorManager, error)
-            }
-        })
-
-        let topViewController = self.topViewController()
-        topViewController.present(alertController, animated: true)
+            onCancel?(errorManager, error)
+        }
 
         if self.delegate != nil {
             self.delegate!.errorManager(self, errorPresented: error)
@@ -233,28 +200,27 @@ public class LolayErrorManager {
             presentError(error)
         }
     }
-    #endif
-    
+
     // MARK: - LolayErrorDelegate
     // Default Implementations
     public func errorManager(_ errorManager: LolayErrorManager, shouldPresentError error: Error) -> Bool {
         return true
     }
-    
+
     public func errorManager(_ errorManager: LolayErrorManager, errorPresented error: Error) { }
-    
+
     public func errorManager(_ errorManager: LolayErrorManager, localizedStringForKey key: String) -> String? {
         return errorManager.localizedStringForKey(key, skipDelegate: true)
     }
-    
+
     public func errorManager(_ errorManager: LolayErrorManager, titleForError error: Error) -> String {
         return errorManager.titleForError(error, skipDelegate: true)
     }
-    
+
     public func errorManager(_ errorManager: LolayErrorManager, messageForError error: Error) -> String? {
         return errorManager.messageForError(error, skipDelegate: true)
     }
-    
+
     public func errorManager(_ errorManager: LolayErrorManager, buttonTextForError error: Error) -> String {
         return errorManager.buttonTextForError(error, skipDelegate: true)
     }

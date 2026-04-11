@@ -35,10 +35,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "LolayErred",
-            linkerSettings: [
-                .linkedFramework("UIKit", .when(platforms: [.iOS, .tvOS, .watchOS, .visionOS, .macCatalyst]))
-            ]
+            name: "LolayErred"
         ),
         .testTarget(
             name: "LolayErredTests",
