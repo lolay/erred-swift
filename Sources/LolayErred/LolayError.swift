@@ -15,7 +15,7 @@
 
 import Foundation
 
-public protocol LolayError: Error {
+public protocol LolayError: Error, Sendable {
     var errorKey: String { get }
 }
 

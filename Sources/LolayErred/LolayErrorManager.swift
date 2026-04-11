@@ -14,13 +14,15 @@
 //
 
 import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 
 @MainActor
 public class LolayErrorManager {
     public weak var delegate: LolayErrorDelegate?
-    public let bundle: Bundle?
-    public let tableName: String?
+    public nonisolated let bundle: Bundle?
+    public nonisolated let tableName: String?
     var showingError: Bool = false
 
     public init() {
@@ -165,16 +167,17 @@ public class LolayErrorManager {
         return button!
     }
     
+    #if canImport(UIKit)
     func topViewController() -> UIViewController {
         // This would be a problem with multiple screens as it arbitrarily chooses which window to display the error
         let controller = UIApplication.shared.connectedScenes.compactMap { ($0 as? UIWindowScene)?.keyWindow }.first!.rootViewController
         assert(controller != nil, "App doesn't have a rootViewController yet!")
         return self.topViewController(controller: controller!)
     }
-    
+
     func topViewController(controller: UIViewController) -> UIViewController {
         var nextController: UIViewController?
-        
+
         if let navigationController = controller as? UINavigationController {
             nextController = navigationController.topViewController
         } else if let tabController = controller as? UITabBarController {
@@ -182,54 +185,55 @@ public class LolayErrorManager {
         } else if let presentedController = controller.presentedViewController {
             nextController = presentedController
         }
-        
+
         if let recurseController = nextController {
             return self.topViewController(controller: recurseController)
         }
-        
+
         return controller
     }
-    
+
     @MainActor
-    public func presentError(_ error: Error, onCancel: ((LolayErrorManager, Error) -> Void)? = nil) {
+    public func presentError(_ error: Error, onCancel: (@MainActor (LolayErrorManager, Error) -> Void)? = nil) {
         var presentError = true
         if self.delegate != nil {
             presentError = self.delegate!.errorManager(self, shouldPresentError: error)
         }
         guard presentError else { return }
-        
+
         guard !self.showingError else { return }
         self.showingError = true
-        
+
         let title = titleForError(error)
         let message = messageForError(error)
         let buttonText = buttonTextForError(error)
-        
+
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: buttonText, style: .cancel) { [weak self, error, onCancel] action in
             guard let errorManager = self else { return }
-            
+
             errorManager.showingError = false
-            
+
             if let onAction = onCancel {
                 onAction(errorManager, error)
             }
         })
-        
+
         let topViewController = self.topViewController()
         topViewController.present(alertController, animated: true)
-        
+
         if self.delegate != nil {
             self.delegate!.errorManager(self, errorPresented: error)
         }
     }
-    
+
     @MainActor
     public func presentErrors(_ errors: [Error]) {
         for error in errors {
             presentError(error)
         }
     }
+    #endif
     
     // MARK: - LolayErrorDelegate
     // Default Implementations

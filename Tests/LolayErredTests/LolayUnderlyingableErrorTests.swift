@@ -13,50 +13,50 @@
 //  limitations under the License.
 //
 
-import XCTest
+import Testing
 @testable import LolayErred
 
-class LolayErredTests: XCTestCase {
+struct LolayUnderlyingableErrorTests {
     struct UnderlyingableError: LolayUnderlyingableError, Equatable {
         let underlyingError: Error?
-        
+
         init(underlyingError: Error?) {
             self.underlyingError = underlyingError
         }
-        
+
         static func == (lhs: UnderlyingableError, rhs: UnderlyingableError) -> Bool {
             if (lhs.underlyingError == nil && rhs.underlyingError == nil) {
                 return true
             } else if (lhs.underlyingError == nil || rhs.underlyingError == nil) {
                 return false
             }
-            
+
             let lhse = lhs.underlyingError!
             let rhse = rhs.underlyingError!
-            
+
             return lhse.localizedDescription == rhse.localizedDescription
         }
     }
-    
+
     enum NormalError: Error, Equatable {
         case root
     }
-    
-    func testNested() {
+
+    @Test func nested() {
         let rootError = NormalError.root
         let intermediateError = UnderlyingableError(underlyingError: rootError)
         let topError = UnderlyingableError(underlyingError: intermediateError)
-        
+
         let underlyingError = topError.recursiveUnderlyingError()
-        XCTAssertNotNil(underlyingError)
-        XCTAssertEqual(rootError, underlyingError as! NormalError)
-        
+        #expect(underlyingError != nil)
+        #expect(rootError == underlyingError as! NormalError)
+
         let underlyingErrorOrSelf = topError.recursiveUnderlyingError()
-        XCTAssertNotNil(underlyingErrorOrSelf)
-        XCTAssertEqual(rootError, underlyingErrorOrSelf as! NormalError)
-        
+        #expect(underlyingErrorOrSelf != nil)
+        #expect(rootError == underlyingErrorOrSelf as! NormalError)
+
         let noUnderlyingError = UnderlyingableError(underlyingError: nil)
-        XCTAssertNil(noUnderlyingError.underlyingError)
-        XCTAssertEqual(noUnderlyingError, noUnderlyingError.recursiveUnderlyingErrorOrSelf() as! UnderlyingableError)
+        #expect(noUnderlyingError.underlyingError == nil)
+        #expect(noUnderlyingError == noUnderlyingError.recursiveUnderlyingErrorOrSelf() as! UnderlyingableError)
     }
 }

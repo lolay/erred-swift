@@ -14,7 +14,11 @@
 //
 
 
+#if __has_include(<UIKit/UIKit.h>)
 #import <UIKit/UIKit.h>
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 //! Project version number for LolayErred.
 FOUNDATION_EXPORT double LolayErredVersionNumber;
