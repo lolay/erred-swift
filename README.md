@@ -5,4 +5,4 @@ To build this project, you can use xcodebuild. First, to list the builds, you ca
 To see which destinations you can build.
 `xcodebuild -showdestinations -scheme LolayErred`
 And to build you can use the following.
-`xcodebuild -scheme LolayErred -destination "platform=iOS Simulator,OS=16.2,name=iPhone 14"`
+`xcodebuild -scheme LolayErred -destination "platform=iOS Simulator,OS=27.0,name=iPhone 17"`
