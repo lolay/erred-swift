@@ -13,7 +13,8 @@
 //  limitations under the License.
 //
 
-#if canImport(UIKit)
+// watchOS ships UIKit but not its view and controller classes.
+#if canImport(UIKit) && !os(watchOS)
 import UIKit
 
 @MainActor
